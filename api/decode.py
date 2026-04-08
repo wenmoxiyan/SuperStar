@@ -66,7 +66,8 @@ def decode_course_point(_text):
                 _point_detail["jobCount"] = _point.select_one("input.knowledgeJobCount").attrs["value"]
             else:
                 # 判断是不是因为需要解锁
-                if '解锁' in _point.select_one("span.bntHoverTips").text:
+            tip_element = _point.select_one("span.bntHoverTips")
+            if tip_element is not None and '解锁' in tip_element.text:
                     _course_point["hasLocked"] = True
             
             _point_list.append(_point_detail)
